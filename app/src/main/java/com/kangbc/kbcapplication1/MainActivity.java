@@ -9,7 +9,6 @@ import android.widget.Button;
 
 import com.kangbc.kbcapplication1.activity.BackPressCloseHandler;
 import com.kangbc.kbcapplication1.activity.CameraActivity;
-import com.kangbc.kbcapplication1.activity.DataBindingActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,22 +25,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
-        Button btnDataBinding = (Button) findViewById(R.id.btnDataBinding);
-        btnDataBinding.setOnClickListener(this);
-
         Button btnCamera = (Button) findViewById(R.id.btnCamera);
         btnCamera.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-
         Intent intent;
 
         switch (view.getId()){
-            case R.id.btnDataBinding:
-                intent = new Intent(this,DataBindingActivity.class);
-                break;
             case R.id.btnCamera:
                 intent = new Intent(this,CameraActivity.class);
                 break;

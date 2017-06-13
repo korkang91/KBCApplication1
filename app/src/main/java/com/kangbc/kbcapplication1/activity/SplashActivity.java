@@ -1,16 +1,10 @@
 package com.kangbc.kbcapplication1.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-
-import com.kangbc.kbcapplication1.MainActivity;
-import com.kangbc.kbcapplication1.R;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -26,10 +20,10 @@ public class SplashActivity extends AppCompatActivity {
         int secondsDelayed = 1;
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                startActivity(new Intent(SplashActivity.this, CameraActivity.class));
                 finish();
             }
-        }, secondsDelayed * 2000);
+        }, secondsDelayed * 1000);
 
     }
     @Override
@@ -49,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     public void onRestart() {
         super.onRestart();
-        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        startActivity(new Intent(SplashActivity.this, CameraActivity.class));
         finish();
     }
 
