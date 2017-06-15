@@ -32,13 +32,13 @@ import io.ghyeok.stickyswitch.widget.StickySwitch;
 public class CameraActivity extends AppCompatActivity {
     private BackPressCloseHandler backPressCloseHandler;    //뒤로가기 클래스
 
-    private Camera camera;
-    private boolean isFlashOn = false;
+    public Camera camera;
+    public boolean isFlashOn = false;
     public boolean permission = false;
-    Parameters params;
+    public Parameters params;
 
-    private ShineButton shineButton;
-    private String TAG = "KBC LOG";
+    public ShineButton shineButton;
+    public String TAG = "KBC LOG";
     public static boolean FLASH_STATUS = false;
 
 
@@ -91,27 +91,14 @@ public class CameraActivity extends AppCompatActivity {
         setPermission();
 
         //
-        final View actionB = findViewById(R.id.action_b);
 
-//        FloatingActionButton actionC = new FloatingActionButton(getBaseContext());
-//        actionC.setTitle("Hide/Show Action above");
-//        actionC.setOnClickListener(new View.OnClickListener() {
+//        final FloatingActionButton actionA = (FloatingActionButton) findViewById(R.id.action_a);
+//        actionA.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onClick(View v) {
-//                actionB.setVisibility(actionB.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+//            public void onClick(View view) {
+//                actionA.setTitle("Action A clicked");
 //            }
 //        });
-//
-//        final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
-//        menuMultipleActions.addButton(actionC);
-
-        final FloatingActionButton actionA = (FloatingActionButton) findViewById(R.id.action_a);
-        actionA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                actionA.setTitle("Action A clicked");
-            }
-        });
 
     }
 
@@ -136,7 +123,7 @@ public class CameraActivity extends AppCompatActivity {
                 .check();
     }
 
-    private void getCamera() {
+    public void getCamera() {
         if (camera == null) {
             try {
                 camera = Camera.open();
@@ -147,7 +134,7 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
-    private void turnOnFlash() {
+    public void turnOnFlash() {
         if(!isFlashOn) {
             if(camera == null || params == null) {
                 getCamera();
@@ -162,7 +149,7 @@ public class CameraActivity extends AppCompatActivity {
 
     }
 
-    private void turnOffFlash() {
+    public void turnOffFlash() {
         if (isFlashOn) {
             if (camera == null || params == null) {
                 return;

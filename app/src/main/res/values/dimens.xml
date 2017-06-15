@@ -11,4 +11,10 @@
     <dimen name="profile_avatar_size">80dp</dimen>
     <dimen name="profile_follow_progress_size">24dp</dimen>
     <dimen name="profile_follow_button_height">36dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
 </resources>

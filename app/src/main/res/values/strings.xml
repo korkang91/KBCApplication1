@@ -4,4 +4,6 @@
     <string name="flash_on">On</string>
     <string name="flash_off">Off</string>
     <string name="permlab_flashlight">flashlight</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
