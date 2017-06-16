@@ -23,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(new Intent(SplashActivity.this, CameraActivity.class));
                 finish();
             }
-        }, secondsDelayed * 1000);
+        }, secondsDelayed * 300);
 
     }
     @Override

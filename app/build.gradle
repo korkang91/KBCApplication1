@@ -5,6 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.kangbc.kbcapplication1"
+        multiDexEnabled true
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
@@ -16,9 +17,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-    dataBinding {
-        enabled = true
+        applicationVariants.all { variant ->
+            variant.outputs.each {
+                output->
+                    def file = output.outputFile
+                    output.outputFile = new File(file.parent,
+                            file.name.replace("app", "손전등." + defaultConfig.versionName))
+            }
+        }
     }
 }
 
@@ -31,9 +37,7 @@ dependencies {
     compile 'com.google.android.gms:play-services:10.0.1'
     compile "com.android.support:recyclerview-v7:25.3.1"
     testCompile 'junit:junit:4.12'
-    compile 'com.github.bumptech.glide:glide:3.6.0'
     compile 'gun0912.ted:tedpermission:1.0.3'
-    compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.sackcentury:shinebutton:0.1.7'
     compile 'com.github.GwonHyeok:StickySwitch:0.0.11'
     compile 'com.getbase:floatingactionbutton:1.10.1'

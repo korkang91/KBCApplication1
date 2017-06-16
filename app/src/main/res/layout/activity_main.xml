@@ -10,13 +10,4 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.kangbc.kbcapplication1.MainActivity">
 
-    <Button
-        android:id="@+id/btnCamera"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Camera"
-        android:layout_below="@+id/btnDataBinding"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
 </RelativeLayout>

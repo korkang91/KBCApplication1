@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
@@ -43,6 +44,7 @@ public class CameraActivity extends AppCompatActivity {
     public Parameters params;
 
     public ShineButton shineButton;
+    public ImageButton imageButton;
     public String TAG = "KBC LOG";
     public static boolean FLASH_STATUS = false;
 
@@ -69,8 +71,27 @@ public class CameraActivity extends AppCompatActivity {
         setFullAd();
         backPressCloseHandler = new BackPressCloseHandler(this);
 
-        shineButton = (ShineButton) findViewById(R.id.shine_button);
-        shineButton.setOnClickListener(new View.OnClickListener() {
+//        shineButton = (ShineButton) findViewById(R.id.shine_button);
+//        shineButton.init(this);
+//        shineButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!permission) {
+//                    setPermission();
+//                    return;
+//                }
+//                if (FLASH_STATUS == false) {
+//                    turnOnFlash();
+//                    FLASH_STATUS = true;
+//                } else {
+//                    turnOffFlash();
+//                    FLASH_STATUS = false;
+//                }
+//            }
+//        });
+
+        imageButton = (ImageButton) findViewById(R.id.image_button);
+        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!permission) {
@@ -79,16 +100,18 @@ public class CameraActivity extends AppCompatActivity {
                 }
                 if (FLASH_STATUS == false) {
                     turnOnFlash();
+                    imageButton.setImageResource(R.drawable.ic_flash_on_yellow);
                     FLASH_STATUS = true;
                 } else {
                     turnOffFlash();
+                    imageButton.setImageResource(R.drawable.ic_flash_off_black);
                     FLASH_STATUS = false;
                 }
             }
         });
 
         // Set Selected Change Listener
-        StickySwitch stickySwitch = (StickySwitch) findViewById(R.id.sticky_switch);
+        /*StickySwitch stickySwitch = (StickySwitch) findViewById(R.id.sticky_switch);
         stickySwitch.setOnSelectedChangeListener(new StickySwitch.OnSelectedChangeListener() {
             @Override
             public void onSelectedChange(@NotNull StickySwitch.Direction direction, @NotNull String text) {
@@ -105,7 +128,7 @@ public class CameraActivity extends AppCompatActivity {
                     FLASH_STATUS = false;
                 }
             }
-        });
+        });*/
 
 
         setPermission();

@@ -35,7 +35,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true">
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
+        <!--<com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
@@ -57,40 +57,51 @@
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
             fab:fab_colorPressed="@color/white_pressed"
-            fab:fab_size="mini"/>
+            fab:fab_size="mini"/>-->
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/action_enable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            fab:fab_icon="@mipmap/ic_flash"
             fab:fab_colorNormal="@color/white"
-            fab:fab_title="Set bottom menu enabled/disabled"
+            fab:fab_title="광고보기"
             fab:fab_colorPressed="@color/white_pressed"
             fab:fab_size="mini"/>
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
-    <com.sackcentury.shinebuttonlib.ShineButton
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerInParent="true"
-        android:id="@+id/shine_button"
-        app:btn_color="@android:color/darker_gray"
-        app:btn_fill_color="#FFFF00"
-        app:allow_random_color="true"
-        app:enable_flashing="true"
-        app:big_shine_color="#FFFF00"
-        app:click_animation_duration="100"
-        app:shine_animation_duration="500"
-        app:shine_turn_angle="10"
-        app:small_shine_offset_angle="20"
-        app:shine_distance_multiple="1.5"
-        app:small_shine_color="#CC9999"
-        app:shine_count="8"
-        app:siShape="@mipmap/ic_flash"
-        android:elevation="10dp"/>
+    <!--<com.sackcentury.shinebuttonlib.ShineButton-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:id="@+id/shine_button"-->
+        <!--app:btn_color="@android:color/darker_gray"-->
+        <!--app:btn_fill_color="#FFFF00"-->
+        <!--app:allow_random_color="true"-->
+        <!--app:enable_flashing="true"-->
+        <!--app:big_shine_color="#FFFF00"-->
+        <!--app:click_animation_duration="150"-->
+        <!--app:shine_animation_duration="800"-->
+        <!--app:shine_turn_angle="10"-->
+        <!--app:small_shine_offset_angle="20"-->
+        <!--app:shine_distance_multiple="1.5"-->
+        <!--app:small_shine_color="#CC9999"-->
+        <!--app:shine_count="8"-->
+        <!--app:siShape="@mipmap/ic_flash"-->
+        <!--android:elevation="10dp"/>-->
 
-    <io.ghyeok.stickyswitch.widget.StickySwitch
+    <ImageButton
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent"
+        android:id="@+id/image_button"
+        android:padding="0dp"
+        android:src="@drawable/ic_flash_off_black"/>
+
+
+    <!--<io.ghyeok.stickyswitch.widget.StickySwitch
         android:id="@+id/sticky_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -108,7 +119,7 @@
         app:ss_textSize="12sp"
         android:layout_below="@+id/shine_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp" />
+        android:layout_marginTop="45dp" />-->
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -119,40 +130,5 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id_choice">
     </com.google.android.gms.ads.AdView>
-
-
-
-    <!--<com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/multiple_actions"
-        android:layout_width="313dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        fab:fab_addButtonColorNormal="@color/white"
-        fab:fab_addButtonColorPressed="@color/white_pressed"
-        fab:fab_addButtonPlusIconColor="@color/half_black"
-        fab:fab_labelStyle="@style/menu_labels_style"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp">
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_a"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_title="Action A"
-            fab:fab_colorPressed="@color/white_pressed"/>
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_b"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_title="Action with a very long name"
-            fab:fab_colorPressed="@color/white_pressed"/>
-
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>-->
 
 </RelativeLayout>

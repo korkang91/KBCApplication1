@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KBC\n손전등</string>
+    <string name="app_name">손전등</string>
     <string name="camera_shot">찍자</string>
     <string name="flash_on">On</string>
     <string name="flash_off">Off</string>

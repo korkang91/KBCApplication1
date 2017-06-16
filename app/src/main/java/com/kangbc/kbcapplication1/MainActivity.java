@@ -25,24 +25,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
-        Button btnCamera = (Button) findViewById(R.id.btnCamera);
-        btnCamera.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        Intent intent;
-
-        switch (view.getId()){
-            case R.id.btnCamera:
-                intent = new Intent(this,CameraActivity.class);
-                break;
-
-            default:
-                return;
-        }
-
-        startActivity(intent);
 
     }
 
