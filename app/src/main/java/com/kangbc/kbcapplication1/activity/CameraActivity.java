@@ -13,6 +13,8 @@ import android.view.View;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdView;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.kangbc.kbcapplication1.R;
@@ -23,6 +25,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 import io.ghyeok.stickyswitch.widget.StickySwitch;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 
 /**
@@ -41,12 +46,27 @@ public class CameraActivity extends AppCompatActivity {
     public String TAG = "KBC LOG";
     public static boolean FLASH_STATUS = false;
 
+    private InterstitialAd interstitialAd;  // ADmob
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_activity);
 
+//        AdView mAdView = (AdView) findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
+
+        // ADmob 배너
+        AdView adView = (AdView)this.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("55F98698C32B5AE8C3DC14ACCA36C26A")
+                .build();
+        adView.loadAd(adRequest);
+
+        setFullAd();
         backPressCloseHandler = new BackPressCloseHandler(this);
 
         shineButton = (ShineButton) findViewById(R.id.shine_button);
@@ -92,13 +112,14 @@ public class CameraActivity extends AppCompatActivity {
 
         //
 
-//        final FloatingActionButton actionA = (FloatingActionButton) findViewById(R.id.action_a);
-//        actionA.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
+        final FloatingActionButton actionA = (FloatingActionButton) findViewById(R.id.action_enable);
+        actionA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 //                actionA.setTitle("Action A clicked");
-//            }
-//        });
+                displayAD();
+            }
+        });
 
     }
 
@@ -207,6 +228,33 @@ public class CameraActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         backPressCloseHandler.onBackPressed();
+    }
+
+    private void setFullAd(){
+        interstitialAd = new InterstitialAd(this); //새 광고를 만듭니다.
+        interstitialAd.setAdUnitId(getResources().getString(R.string.fullAd)); //이전에 String에 저장해 두었던 광고 ID를 전면 광고에 설정합니다.
+        AdRequest adRequest1 = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("55F98698C32B5AE8C3DC14ACCA36C26A")
+                .build();
+        interstitialAd.loadAd(adRequest1); //요청한 광고를 load 합니다.
+        interstitialAd.setAdListener(new AdListener() { //전면 광고의 상태를 확인하는 리스너 등록
+
+            @Override
+            public void onAdClosed() { //전면 광고가 열린 뒤에 닫혔을 때
+                AdRequest adRequest1 = new AdRequest.Builder()
+                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                        .addTestDevice("55F98698C32B5AE8C3DC14ACCA36C26A")
+                        .build(); //새 광고요청
+                interstitialAd.loadAd(adRequest1); //요청한 광고를 load 합니다.
+            }
+        });
+    }
+
+    public void displayAD(){
+        if(interstitialAd.isLoaded()) { //광고가 로드 되었을 시
+            interstitialAd.show(); //보여준다
+        }
     }
 
 }

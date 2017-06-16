@@ -82,7 +82,6 @@ public class FlashlightWidget extends AppWidgetProvider {
                 Log.e("Flash state", "Flash ON Exception");
             }
         }else if(action.equals(ACTION_FLASH_OFF)){
-            Log.e("Flash state", intent.getAction());
             try{
 
                 flashControl = 0;

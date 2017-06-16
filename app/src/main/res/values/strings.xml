@@ -6,4 +6,6 @@
     <string name="permlab_flashlight">flashlight</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="fullAd">ca-app-pub-8149923844085303/4905353271</string>
+    <string name="banner_ad_unit_id_choice">ca-app-pub-8149923844085303/6102884879</string>
 </resources>
