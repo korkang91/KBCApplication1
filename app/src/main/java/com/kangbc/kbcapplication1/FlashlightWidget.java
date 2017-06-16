@@ -30,18 +30,14 @@ public class FlashlightWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // TODO Auto-generated method stub
-        Log.e("Widget State","onUpdate");
 
         flashWidget = new ComponentName(context, FlashlightWidget.class);
         views = new RemoteViews(context.getPackageName(), R.layout.flashlight_widget);
 
         if(flashControl == 0){
-            Log.e("onUpdate State","flashControl == 0");
             views.setImageViewResource(R.id.flash_btn, R.drawable.ic_flash_off_black);
             intent = new Intent(ACTION_FLASH_ON);
         }else if(flashControl == 1){
-            Log.e("onUpdate State","flashControl == 1");
             views.setImageViewResource(R.id.flash_btn, R.drawable.ic_flash_on_yellow);
             intent = new Intent(ACTION_FLASH_OFF);
         }
@@ -55,13 +51,9 @@ public class FlashlightWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TODO Auto-generated method stub
-        Log.e("Widget State","onReceive");
-
         String action = intent.getAction();
 
         if(action.equals(ACTION_FLASH_ON)){
-            Log.e("Flash state", intent.getAction());
             try{
                 flashControl = 1;
 
