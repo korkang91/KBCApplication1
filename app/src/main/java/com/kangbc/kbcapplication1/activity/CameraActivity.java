@@ -1,8 +1,6 @@
 package com.kangbc.kbcapplication1.activity;
 
 import android.Manifest;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.os.Bundle;
@@ -13,22 +11,15 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.kangbc.kbcapplication1.R;
-import com.sackcentury.shinebuttonlib.ShineButton;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-
-import io.ghyeok.stickyswitch.widget.StickySwitch;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 
 
 /**
@@ -43,7 +34,6 @@ public class CameraActivity extends AppCompatActivity {
     public boolean permission = false;
     public Parameters params;
 
-    public ShineButton shineButton;
     public ImageButton imageButton;
     public String TAG = "KBC LOG";
     public static boolean FLASH_STATUS = false;
@@ -56,39 +46,18 @@ public class CameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_activity);
 
-//        AdView mAdView = (AdView) findViewById(R.id.adView);
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        mAdView.loadAd(adRequest);
-
         // ADmob 배너
         AdView adView = (AdView)this.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("55F98698C32B5AE8C3DC14ACCA36C26A")
+//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                .addTestDevice("55F98698C32B5AE8C3DC14ACCA36C26A")
                 .build();
         adView.loadAd(adRequest);
 
+        // ADmob 전면광고
         setFullAd();
-        backPressCloseHandler = new BackPressCloseHandler(this);
 
-//        shineButton = (ShineButton) findViewById(R.id.shine_button);
-//        shineButton.init(this);
-//        shineButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!permission) {
-//                    setPermission();
-//                    return;
-//                }
-//                if (FLASH_STATUS == false) {
-//                    turnOnFlash();
-//                    FLASH_STATUS = true;
-//                } else {
-//                    turnOffFlash();
-//                    FLASH_STATUS = false;
-//                }
-//            }
-//        });
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         imageButton = (ImageButton) findViewById(R.id.image_button);
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -110,36 +79,13 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
-        // Set Selected Change Listener
-        /*StickySwitch stickySwitch = (StickySwitch) findViewById(R.id.sticky_switch);
-        stickySwitch.setOnSelectedChangeListener(new StickySwitch.OnSelectedChangeListener() {
-            @Override
-            public void onSelectedChange(@NotNull StickySwitch.Direction direction, @NotNull String text) {
-//                Log.d(TAG, "Now Selected : " + direction.name() + ", Current Text : " + text);
-                if (!permission) {
-                    setPermission();
-                    return;
-                }
-                if (direction.name().equals("RIGHT") && FLASH_STATUS == false) {
-                    turnOnFlash();
-                    FLASH_STATUS = true;
-                } else {
-                    turnOffFlash();
-                    FLASH_STATUS = false;
-                }
-            }
-        });*/
-
-
+        //퍼미션
         setPermission();
-
-        //
 
         final FloatingActionButton actionA = (FloatingActionButton) findViewById(R.id.action_enable);
         actionA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                actionA.setTitle("Action A clicked");
                 displayAD();
             }
         });
@@ -162,7 +108,7 @@ public class CameraActivity extends AppCompatActivity {
 
         new TedPermission(this)
                 .setPermissionListener(permissionlistener)
-                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+                .setDeniedMessage("권한을 허용하지 않을 경우 이 서비스를 사용할 수 없습니다.\n\n권한 설정을 해주시기 바랍니다. [설정] > [애플리케이션] > [권한]")
                 .setPermissions(Manifest.permission.CAMERA)
                 .check();
     }
@@ -257,8 +203,8 @@ public class CameraActivity extends AppCompatActivity {
         interstitialAd = new InterstitialAd(this); //새 광고를 만듭니다.
         interstitialAd.setAdUnitId(getResources().getString(R.string.fullAd)); //이전에 String에 저장해 두었던 광고 ID를 전면 광고에 설정합니다.
         AdRequest adRequest1 = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("55F98698C32B5AE8C3DC14ACCA36C26A")
+//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                .addTestDevice("55F98698C32B5AE8C3DC14ACCA36C26A")
                 .build();
         interstitialAd.loadAd(adRequest1); //요청한 광고를 load 합니다.
         interstitialAd.setAdListener(new AdListener() { //전면 광고의 상태를 확인하는 리스너 등록
@@ -266,8 +212,8 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void onAdClosed() { //전면 광고가 열린 뒤에 닫혔을 때
                 AdRequest adRequest1 = new AdRequest.Builder()
-                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                        .addTestDevice("55F98698C32B5AE8C3DC14ACCA36C26A")
+//                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                        .addTestDevice("55F98698C32B5AE8C3DC14ACCA36C26A")
                         .build(); //새 광고요청
                 interstitialAd.loadAd(adRequest1); //요청한 광고를 load 합니다.
             }

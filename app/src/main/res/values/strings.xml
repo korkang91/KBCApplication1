@@ -1,10 +1,6 @@
 <resources>
     <string name="app_name">손전등</string>
-    <string name="camera_shot">찍자</string>
-    <string name="flash_on">On</string>
-    <string name="flash_off">Off</string>
     <string name="permlab_flashlight">flashlight</string>
-    <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="fullAd">ca-app-pub-8149923844085303/4905353271</string>
     <string name="banner_ad_unit_id_choice">ca-app-pub-8149923844085303/6102884879</string>
