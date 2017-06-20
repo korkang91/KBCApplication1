@@ -6,7 +6,11 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraManager;
+import android.os.Build;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
@@ -27,6 +31,11 @@ public class FlashlightWidget extends AppWidgetProvider {
     int flashControl = 0;
 
     private Intent intent;
+
+    private CameraManager mCameraManager;
+    private String mCameraId;
+    private Boolean isTorchOn = false;
+
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -77,6 +86,15 @@ public class FlashlightWidget extends AppWidgetProvider {
                     }
                 }
 
+                // 수정소스
+//                mCameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+//                try {
+//                    mCameraId = mCameraManager.getCameraIdList()[0];
+//                } catch (CameraAccessException e) {
+//                    e.printStackTrace();
+//                }
+
+
             }catch (Exception e) {
                 // TODO: handle exception
                 Log.e("Flash state", "Flash ON Exception");
@@ -94,6 +112,8 @@ public class FlashlightWidget extends AppWidgetProvider {
                     camera.release();
                     camera = null;
                 }
+
+                //수정소스
 
             }catch (Exception e) {
                 // TODO: handle exception
@@ -113,5 +133,32 @@ public class FlashlightWidget extends AppWidgetProvider {
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
     }
+
+    /*
+    public void turnOnFlashLight() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mCameraManager.setTorchMode(mCameraId, true);
+//                playOnOffSound();
+                imageButton.setImageResource(R.drawable.ic_flash_on_yellow);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void turnOffFlashLight() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mCameraManager.setTorchMode(mCameraId, false);
+//                playOnOffSound();
+                imageButton.setImageResource(R.drawable.ic_flash_off_black);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    */
 }
 

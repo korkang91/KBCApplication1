@@ -1,10 +1,16 @@
 package com.kangbc.kbcapplication1.activity;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
+import android.hardware.camera2.CameraManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +26,10 @@ import com.gun0912.tedpermission.TedPermission;
 import com.kangbc.kbcapplication1.R;
 
 import java.util.ArrayList;
+
+
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraManager;
 
 
 /**
@@ -40,6 +50,11 @@ public class CameraActivity extends AppCompatActivity {
 
     private InterstitialAd interstitialAd;  // ADmob
 
+    private CameraManager mCameraManager;
+    private String mCameraId;
+    private Boolean isTorchOn;
+//    private MediaPlayer mp;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,11 +71,11 @@ public class CameraActivity extends AppCompatActivity {
 
         // ADmob 전면광고
         setFullAd();
+        isTorchOn = false;
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
-        imageButton = (ImageButton) findViewById(R.id.image_button);
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        /*imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!permission) {
@@ -77,10 +92,10 @@ public class CameraActivity extends AppCompatActivity {
                     FLASH_STATUS = false;
                 }
             }
-        });
+        });*/
 
         //퍼미션
-        setPermission();
+//        setPermission();
 
         final FloatingActionButton actionA = (FloatingActionButton) findViewById(R.id.action_enable);
         actionA.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +105,75 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
+        Boolean isFlashAvailable = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+
+        if (!isFlashAvailable) {
+
+            AlertDialog alert = new AlertDialog.Builder(CameraActivity.this)
+                    .create();
+            alert.setTitle("Error !!");
+            alert.setMessage("Your device doesn't support flash light!");
+            alert.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // closing the application
+                    finish();
+                    System.exit(0);
+                }
+            });
+            alert.show();
+            return;
+        }
+
+        mCameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+        try {
+            mCameraId = mCameraManager.getCameraIdList()[0];
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
+
+        imageButton = (ImageButton) findViewById(R.id.image_button);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    if (isTorchOn) {
+                        turnOffFlashLight();
+                        isTorchOn = false;
+                    } else {
+                        turnOnFlashLight();
+                        isTorchOn = true;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+    public void turnOnFlashLight() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mCameraManager.setTorchMode(mCameraId, true);
+//                playOnOffSound();
+                imageButton.setImageResource(R.drawable.ic_flash_on_yellow);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void turnOffFlashLight() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mCameraManager.setTorchMode(mCameraId, false);
+//                playOnOffSound();
+                imageButton.setImageResource(R.drawable.ic_flash_off_black);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setPermission(){
@@ -161,7 +245,8 @@ public class CameraActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         // on pause turn off the flash
-        turnOffFlash();
+//        turnOffFlash();
+        turnOffFlashLight();
     }
 
     @Override
@@ -173,25 +258,27 @@ public class CameraActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         // on resume turn on the flash
-        if(isFlashOn)
-            turnOnFlash();
+        if(isFlashOn) {
+//            turnOnFlash();
+            turnOnFlashLight();
+        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         // on starting the app get the camera params
-        getCamera();
+//        getCamera();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         // on stop release the camera
-        if (camera != null) {
-            camera.release();
-            camera = null;
-        }
+//        if (camera != null) {
+//            camera.release();
+//            camera = null;
+//        }
     }
 
     @Override
